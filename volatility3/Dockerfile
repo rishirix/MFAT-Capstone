@@ -9,9 +9,9 @@ WORKDIR /opt/volatility3
 RUN pip3 install -e ".[full]"
 
 WORKDIR /opt/volatility3/volatility3/symbols
-RUN wget https://downloads.volatilityfoundation.org/volatility3/symbols/windows.zip
-RUN wget https://downloads.volatilityfoundation.org/volatility3/symbols/mac.zip
-RUN wget https://downloads.volatilityfoundation.org/volatility3/symbols/linux.zip
+RUN wget https://downloads.volatilityfoundation.org/volatility3/symbols/windows.zip && unzip windows.zip
+RUN wget https://downloads.volatilityfoundation.org/volatility3/symbols/mac.zip && unzip mac.zip
+RUN wget https://downloads.volatilityfoundation.org/volatility3/symbols/linux.zip && unzip linux.zip
 
 WORKDIR /opt/volatility3
 ENTRYPOINT [ "vol" ]
