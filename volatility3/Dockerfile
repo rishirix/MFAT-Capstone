@@ -1,16 +1,17 @@
 FROM python:3.10-slim
 
-WORKDIR /app
+WORKDIR /opt
 
-RUN apt update && apt install git vim wget curl -y
-RUN git clone https://github.com/volatilityfoundation/volatility3.git --branch stable
-WORKDIR /app/volatility3
+RUN apt update && apt install git wget curl unzip -y \
+&& git clone https://github.com/volatilityfoundation/volatility3.git --branch stable 
+
+WORKDIR /opt/volatility3
 RUN pip3 install -e ".[full]"
-RUN curl -O https://downloads.volatilityfoundation.org/volatility3/symbols/windows.zip
-RUN curl -O https://downloads.volatilityfoundation.org/volatility3/symbols/mac.zip
-RUN curl -O https://downloads.volatilityfoundation.org/volatility3/symbols/linux.zip
-RUN mv *.zip ./volatility3/symbols/
 
-WORKDIR /
+WORKDIR /opt/volatility3/volatility3/symbols
+RUN wget https://downloads.volatilityfoundation.org/volatility3/symbols/windows.zip
+RUN wget https://downloads.volatilityfoundation.org/volatility3/symbols/mac.zip
+RUN wget https://downloads.volatilityfoundation.org/volatility3/symbols/linux.zip
 
-CMD ["/bin/bash"]
+WORKDIR /opt/volatility3
+ENTRYPOINT [ "vol" ]
