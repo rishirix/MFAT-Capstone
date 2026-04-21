@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>MFAT — Memory Forensics Automated Tool</title>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --bg:       #050a0f;
+    --surface:  #0b1420;
+    --surface2: #0f1e30;
+    --border:   #1a3a5c;
+    --green:    #00ff88;
+    --green-dim:#00cc66;
+    --blue:     #00aaff;
+    --amber:    #ffaa00;
+    --red:      #ff4455;
+    --text:     #c8ddef;
+    --muted:    #4a6a8a;
+    --mono:     'Share Tech Mono', monospace;
+    --sans:     'Rajdhani', sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: var(--bg); color: var(--text); font-family: var(--sans); min-height: 100vh; }
+
+  /* Scanline overlay */
+  body::before {
+    content: '';
+    position: fixed; inset: 0; z-index: 0; pointer-events: none;
+    background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,255,136,0.012) 2px, rgba(0,255,136,0.012) 4px);
+  }
+
+  body > * { position: relative; z-index: 1; }
+
+  /* ── Header ── */
+  header {
+    border-bottom: 1px solid var(--border);
+    padding: 18px 32px;
+    display: flex; align-items: center; justify-content: space-between;
+    background: rgba(11,20,32,0.95);
+    backdrop-filter: blur(10px);
+    position: sticky; top: 0; z-index: 100;
+  }
+
+  .logo {
+    font-family: var(--mono);
+    font-size: 22px;
+    color: var(--green);
+    letter-spacing: 2px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .logo::before {
+    content: '';
+    display: inline-block; width: 10px; height: 10px;
+    background: var(--green); border-radius: 50%;
+    box-shadow: 0 0 8px var(--green);
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+
+  .header-sub { font-size: 12px; color: var(--muted); font-family: var(--mono); letter-spacing: 1px; }
+
+  /* ── Layout ── */
+  main { max-width: 1280px; margin: 0 auto; padding: 32px; }
+
+  /* ── Upload Zone ── */
+  .upload-zone {
+    border: 2px dashed var(--border);
+    border-radius: 8px;
+    padding: 48px 32px;
+    text-align: center;
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s;
+    background: var(--surface);
+    position: relative;
+  }
+  .upload-zone:hover, .upload-zone.drag { border-color: var(--green); background: rgba(0,255,136,0.04); }
+  .upload-zone input[type=file] { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; }
+  .upload-icon { font-size: 48px; margin-bottom: 12px; filter: brightness(0.7); }
+  .upload-title { font-family: var(--mono); font-size: 18px; color: var(--green); margin-bottom: 8px; }
+  .upload-sub { font-size: 14px; color: var(--muted); font-family: var(--mono); }
+
+  /* ── Scan Button ── */
+  .scan-btn {
+    display: block; width: 100%; margin-top: 16px;
+    padding: 16px; font-family: var(--mono); font-size: 16px; font-weight: 700;
+    letter-spacing: 3px; text-transform: uppercase;
+    background: transparent; border: 2px solid var(--green);
+    color: var(--green); cursor: pointer; border-radius: 4px;
+    transition: background 0.2s, box-shadow 0.2s;
+  }
+  .scan-btn:hover:not(:disabled) { background: rgba(0,255,136,0.08); box-shadow: 0 0 20px rgba(0,255,136,0.2); }
+  .scan-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+  /* ── Progress ── */
+  .progress-section { margin-top: 24px; display: none; }
+  .progress-section.visible { display: block; }
+  .progress-label { font-family: var(--mono); font-size: 13px; color: var(--blue); margin-bottom: 8px; }
+  .progress-bar-bg { background: var(--surface2); border: 1px solid var(--border); border-radius: 4px; height: 8px; overflow: hidden; }
+  .progress-bar-fill { height: 100%; background: linear-gradient(90deg, var(--green-dim), var(--green)); border-radius: 4px; width: 0%; transition: width 0.4s; }
+  .progress-pct { font-family: var(--mono); font-size: 12px; color: var(--muted); margin-top: 4px; }
+
+  /* ── Section heading ── */
+  .section-title {
+    font-family: var(--mono); font-size: 13px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--muted); margin: 32px 0 16px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .section-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+  /* ── Summary cards ── */
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; }
+
+  .card {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 6px;
+    padding: 20px 16px; text-align: center;
+    transition: border-color 0.2s;
+  }
+  .card:hover { border-color: var(--blue); }
+  .card-num { font-family: var(--mono); font-size: 36px; font-weight: 700; line-height: 1; }
+  .card-label { font-size: 12px; color: var(--muted); margin-top: 6px; text-transform: uppercase; letter-spacing: 1px; }
+
+  .card.green  .card-num { color: var(--green); }
+  .card.red    .card-num { color: var(--red); }
+  .card.amber  .card-num { color: var(--amber); }
+  .card.blue   .card-num { color: var(--blue); }
+
+  /* ── IOC Table ── */
+  .ioc-list { display: flex; flex-direction: column; gap: 8px; }
+
+  .ioc-item {
+    background: var(--surface); border-left: 4px solid var(--border);
+    border-radius: 0 6px 6px 0; padding: 12px 16px;
+    display: grid; grid-template-columns: 100px 80px 1fr; gap: 12px; align-items: start;
+  }
+  .ioc-item.HIGH   { border-color: var(--red); }
+  .ioc-item.MEDIUM { border-color: var(--amber); }
+  .ioc-item.LOW    { border-color: var(--green-dim); }
+
+  .ioc-type { font-family: var(--mono); font-size: 11px; color: var(--muted); }
+  .ioc-sev  { font-family: var(--mono); font-size: 12px; font-weight: 700; }
+  .ioc-sev.HIGH   { color: var(--red); }
+  .ioc-sev.MEDIUM { color: var(--amber); }
+  .ioc-sev.LOW    { color: var(--green); }
+  .ioc-detail { font-family: var(--mono); font-size: 12px; color: var(--text); overflow-wrap: anywhere; }
+  .ioc-desc { font-size: 11px; color: var(--muted); margin-top: 2px; }
+
+  /* ── Data tables ── */
+  .tbl-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 6px; }
+  table { width: 100%; border-collapse: collapse; font-family: var(--mono); font-size: 12px; }
+  thead th { background: var(--surface2); color: var(--muted); text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--border); letter-spacing: 1px; font-size: 11px; }
+  tbody td { padding: 9px 14px; border-bottom: 1px solid rgba(26,58,92,0.4); color: var(--text); vertical-align: top; }
+  tbody tr:last-child td { border-bottom: none; }
+  tbody tr:hover td { background: rgba(0,170,255,0.04); }
+  .badge { display: inline-block; padding: 2px 8px; border-radius: 3px; font-size: 10px; letter-spacing: 1px; }
+  .badge.susp { background: rgba(255,68,85,0.15); color: var(--red); border: 1px solid rgba(255,68,85,0.3); }
+  .badge.ok   { background: rgba(0,255,136,0.1); color: var(--green); border: 1px solid rgba(0,255,136,0.2); }
+  .badge.high  { background: rgba(255,68,85,0.15); color: var(--red); }
+  .badge.medium{ background: rgba(255,170,0,0.15); color: var(--amber); }
+  .badge.low   { background: rgba(0,204,102,0.1); color: var(--green-dim); }
+
+  /* ── Tabs ── */
+  .tabs { display: flex; gap: 0; border-bottom: 1px solid var(--border); margin-bottom: 16px; }
+  .tab { padding: 10px 20px; font-family: var(--mono); font-size: 12px; letter-spacing: 1px; cursor: pointer; border-bottom: 2px solid transparent; color: var(--muted); transition: color 0.2s; }
+  .tab:hover { color: var(--text); }
+  .tab.active { color: var(--green); border-color: var(--green); }
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  /* ── Results section ── */
+  #results { display: none; margin-top: 32px; }
+  #results.visible { display: block; }
+
+  /* ── Empty state ── */
+  .empty { text-align: center; padding: 48px; color: var(--muted); font-family: var(--mono); font-size: 14px; }
+
+  /* ── Filename pill ── */
+  .file-pill {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--surface2); border: 1px solid var(--border);
+    border-radius: 4px; padding: 8px 14px; margin-top: 12px;
+    font-family: var(--mono); font-size: 13px; color: var(--blue);
+  }
+
+  /* ── Threat level banner ── */
+  .threat-banner {
+    border-radius: 6px; padding: 16px 20px;
+    display: flex; align-items: center; justify-content: space-between;
+    font-family: var(--mono);
+  }
+  .threat-banner.high   { background: rgba(255,68,85,0.1); border: 1px solid rgba(255,68,85,0.4); }
+  .threat-banner.medium { background: rgba(255,170,0,0.1); border: 1px solid rgba(255,170,0,0.4); }
+  .threat-banner.low    { background: rgba(0,255,136,0.07); border: 1px solid rgba(0,204,102,0.3); }
+  .threat-level { font-size: 20px; font-weight: 700; }
+  .threat-banner.high   .threat-level { color: var(--red); }
+  .threat-banner.medium .threat-level { color: var(--amber); }
+  .threat-banner.low    .threat-level { color: var(--green); }
+  .threat-meta { font-size: 11px; color: var(--muted); text-align: right; }
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <div class="logo">MFAT</div>
+    <div class="header-sub">Memory Forensics Automated Tool &nbsp;|&nbsp; Malware Detection</div>
+  </div>
+  <div style="font-family:var(--mono);font-size:12px;color:var(--muted)" id="clock"></div>
+</header>
+
+<main>
+
+  <!-- Upload Section -->
+  <div class="section-title">Memory Dump Upload</div>
+
+  <div class="upload-zone" id="dropzone">
+    <input type="file" id="fileInput" accept=".raw,.vmem,.mem,.dmp,.img,.bin"/>
+    <div class="upload-icon">🧠</div>
+    <div class="upload-title">Drop memory dump here</div>
+    <div class="upload-sub">Supported: .raw &nbsp;·&nbsp; .vmem &nbsp;·&nbsp; .mem &nbsp;·&nbsp; .dmp &nbsp;·&nbsp; .img</div>
+  </div>
+
+  <div id="filePill" style="display:none">
+    <div class="file-pill">📄 <span id="fileName">—</span></div>
+  </div>
+
+  <button class="scan-btn" id="scanBtn" disabled onclick="startScan()">
+    ▶ &nbsp; Initiate Scan
+  </button>
+
+  <!-- Progress -->
+  <div class="progress-section" id="progressSection">
+    <div class="progress-label" id="progressLabel">Initializing...</div>
+    <div class="progress-bar-bg">
+      <div class="progress-bar-fill" id="progressFill"></div>
+    </div>
+    <div class="progress-pct" id="progressPct">0%</div>
+  </div>
+
+  <!-- Results -->
+  <div id="results">
+
+    <!-- Threat banner -->
+    <div class="section-title">Threat Assessment</div>
+    <div class="threat-banner" id="threatBanner">
+      <div>
+        <div style="font-size:12px;color:var(--muted);margin-bottom:4px">THREAT LEVEL</div>
+        <div class="threat-level" id="threatLevel">—</div>
+      </div>
+      <div class="threat-meta" id="threatMeta"></div>
+    </div>
+
+    <!-- Summary cards -->
+    <div class="section-title">Summary</div>
+    <div class="cards" id="summaryCards"></div>
+
+    <!-- Tabs -->
+    <div class="section-title">Details</div>
+    <div class="tabs">
+      <div class="tab active" onclick="switchTab('iocs', this)">IOCs</div>
+      <div class="tab" onclick="switchTab('processes', this)">Processes</div>
+      <div class="tab" onclick="switchTab('network', this)">Network</div>
+      <div class="tab" onclick="switchTab('malfind', this)">Malfind</div>
+      <div class="tab" onclick="switchTab('commands', this)">Commands</div>
+    </div>
+
+    <div id="tab-iocs" class="tab-panel active"></div>
+    <div id="tab-processes" class="tab-panel"></div>
+    <div id="tab-network" class="tab-panel"></div>
+    <div id="tab-malfind" class="tab-panel"></div>
+    <div id="tab-commands" class="tab-panel"></div>
+
+  </div>
+
+</main>
+
+<script>
+// Clock
+setInterval(() => {
+  const d = new Date();
+  document.getElementById('clock').textContent = d.toUTCString().replace('GMT','UTC');
+}, 1000);
+
+// File input
+let selectedFile = null;
+let currentScanId = null;
+let pollInterval = null;
+
+const API = ''; // same origin — Flask serves both
+
+document.getElementById('fileInput').addEventListener('change', e => {
+  const f = e.target.files[0];
+  if (!f) return;
+  selectedFile = f;
+  document.getElementById('fileName').textContent = f.name + ' (' + (f.size / 1024 / 1024).toFixed(1) + ' MB)';
+  document.getElementById('filePill').style.display = 'block';
+  document.getElementById('scanBtn').disabled = false;
+});
+
+// Drag and drop
+const dz = document.getElementById('dropzone');
+dz.addEventListener('dragover', e => { e.preventDefault(); dz.classList.add('drag'); });
+dz.addEventListener('dragleave', () => dz.classList.remove('drag'));
+dz.addEventListener('drop', e => {
+  e.preventDefault(); dz.classList.remove('drag');
+  const f = e.dataTransfer.files[0];
+  if (f) {
+    selectedFile = f;
+    document.getElementById('fileName').textContent = f.name + ' (' + (f.size / 1024 / 1024).toFixed(1) + ' MB)';
+    document.getElementById('filePill').style.display = 'block';
+    document.getElementById('scanBtn').disabled = false;
+  }
+});
+
+async function startScan() {
+  if (!selectedFile) return;
+  document.getElementById('scanBtn').disabled = true;
+  document.getElementById('results').classList.remove('visible');
+
+  const fd = new FormData();
+  fd.append('file', selectedFile);
+
+  try {
+    const res = await fetch(`${API}/api/upload`, { method: 'POST', body: fd });
+    const data = await res.json();
+    if (data.error) { alert('Upload error: ' + data.error); document.getElementById('scanBtn').disabled = false; return; }
+
+    currentScanId = data.scan_id;
+    document.getElementById('progressSection').classList.add('visible');
+    pollInterval = setInterval(pollStatus, 1500);
+
+  } catch(err) {
+    alert('Could not connect to backend. Is it running?\n\n' + err);
+    document.getElementById('scanBtn').disabled = false;
+  }
+}
+
+async function pollStatus() {
+  try {
+    const res = await fetch(`${API}/api/status/${currentScanId}`);
+    const s = await res.json();
+
+    document.getElementById('progressLabel').textContent = s.message || '...';
+    document.getElementById('progressFill').style.width = (s.progress || 0) + '%';
+    document.getElementById('progressPct').textContent = (s.progress || 0) + '%';
+
+    if (s.status === 'done') {
+      clearInterval(pollInterval);
+      loadResults(currentScanId);
+    } else if (s.status === 'error') {
+      clearInterval(pollInterval);
+      document.getElementById('progressLabel').textContent = '❌ ' + s.message;
+      document.getElementById('progressFill').style.background = 'var(--red)';
+      document.getElementById('scanBtn').disabled = false;
+    }
+  } catch(err) { /* network blip, keep polling */ }
+}
+
+async function loadResults(scanId) {
+  const res = await fetch(`${API}/api/results/${scanId}`);
+  const data = await res.json();
+  renderResults(data);
+  document.getElementById('results').classList.add('visible');
+  document.getElementById('scanBtn').disabled = false;
+}
+
+function renderResults(data) {
+  const s = data.summary || {};
+
+  // Threat banner
+  const highIocs = s.high_iocs || 0;
+  const totalIocs = s.total_iocs || 0;
+  let level, cls;
+  if (highIocs >= 1) { level = 'HIGH'; cls = 'high'; }
+  else if (totalIocs >= 3) { level = 'MEDIUM'; cls = 'medium'; }
+  else { level = 'LOW — CLEAN'; cls = 'low'; }
+
+  const banner = document.getElementById('threatBanner');
+  banner.className = 'threat-banner ' + cls;
+  document.getElementById('threatLevel').textContent = level;
+  document.getElementById('threatMeta').innerHTML =
+    `Scan ID: ${currentScanId}<br>` +
+    `Image: ${(data.meta || {}).image_name || 'unknown'}<br>` +
+    `Vol: ${(data.meta || {}).vol_version || '?'}` +
+    ((data.meta || {}).profile ? ` / ${data.meta.profile}` : '');
+
+  // Summary cards
+  const cards = [
+    { num: s.total_processes || 0, label: 'Total Processes', cls: 'blue' },
+    { num: s.suspicious_processes || 0, label: 'Suspicious Proc', cls: 'amber' },
+    { num: s.network_connections || 0, label: 'Network Conns', cls: 'blue' },
+    { num: s.suspicious_connections || 0, label: 'Suspicious Conns', cls: 'red' },
+    { num: s.malfind_hits || 0, label: 'Malfind Hits', cls: 'red' },
+    { num: s.suspicious_commands || 0, label: 'Malicious Cmds', cls: 'red' },
+    { num: s.total_iocs || 0, label: 'Total IOCs', cls: highIocs > 0 ? 'red' : 'amber' },
+    { num: s.high_iocs || 0, label: 'High Severity', cls: 'red' },
+  ];
+  document.getElementById('summaryCards').innerHTML = cards.map(c =>
+    `<div class="card ${c.cls}">
+      <div class="card-num">${c.num}</div>
+      <div class="card-label">${c.label}</div>
+    </div>`
+  ).join('');
+
+  // IOC tab
+  const iocs = data.iocs || [];
+  document.getElementById('tab-iocs').innerHTML = iocs.length === 0
+    ? '<div class="empty">No IOCs detected.</div>'
+    : `<div class="ioc-list">${iocs.map(i =>
+        `<div class="ioc-item ${i.severity}">
+          <div><div class="ioc-type">${i.type}</div></div>
+          <div><span class="ioc-sev ${i.severity}">${i.severity}</span></div>
+          <div><div class="ioc-detail">${esc(i.detail)}</div><div class="ioc-desc">${esc(i.description || '')}</div></div>
+        </div>`
+      ).join('')}</div>`;
+
+  // Processes tab
+  const procs = data.processes || [];
+  document.getElementById('tab-processes').innerHTML = procs.length === 0
+    ? '<div class="empty">No process data.</div>'
+    : `<div class="tbl-wrap"><table>
+        <thead><tr><th>NAME</th><th>PID</th><th>PPID</th><th>STATUS</th></tr></thead>
+        <tbody>${procs.map(p =>
+          `<tr>
+            <td>${esc(p.name)}</td>
+            <td>${p.pid}</td>
+            <td>${p.ppid}</td>
+            <td><span class="badge ${p.suspicious ? 'susp' : 'ok'}">${p.suspicious ? 'SUSPICIOUS' : 'OK'}</span></td>
+          </tr>`
+        ).join('')}</tbody>
+      </table></div>`;
+
+  // Network tab
+  const conns = data.connections || [];
+  document.getElementById('tab-network').innerHTML = conns.length === 0
+    ? '<div class="empty">No network data.</div>'
+    : `<div class="tbl-wrap"><table>
+        <thead><tr><th>PROTO</th><th>LOCAL</th><th>REMOTE</th><th>STATE</th><th>FLAG</th></tr></thead>
+        <tbody>${conns.map(c =>
+          `<tr>
+            <td>${esc(c.proto)}</td>
+            <td>${esc(c.local)}</td>
+            <td>${esc(c.remote)}</td>
+            <td>${esc(c.state)}</td>
+            <td>${c.suspicious_port ? '<span class="badge susp">SUSPECT PORT</span>' : '—'}</td>
+          </tr>`
+        ).join('')}</tbody>
+      </table></div>`;
+
+  // Malfind tab
+  const mf = data.malfind || [];
+  document.getElementById('tab-malfind').innerHTML = mf.length === 0
+    ? '<div class="empty">No malfind hits.</div>'
+    : `<div class="tbl-wrap"><table>
+        <thead><tr><th>PROCESS</th><th>PE HEADER</th><th>EXEC MEM</th><th>SEVERITY</th></tr></thead>
+        <tbody>${mf.map(m =>
+          `<tr>
+            <td>${esc(m.process)}</td>
+            <td>${m.has_pe_header ? '<span class="badge susp">YES</span>' : '—'}</td>
+            <td>${m.has_exec ? '<span class="badge susp">YES</span>' : '—'}</td>
+            <td><span class="badge ${m.severity.toLowerCase()}">${m.severity}</span></td>
+          </tr>`
+        ).join('')}</tbody>
+      </table></div>`;
+
+  // Commands tab
+  const cmds = data.commands || [];
+  document.getElementById('tab-commands').innerHTML = cmds.length === 0
+    ? '<div class="empty">No command data.</div>'
+    : `<div class="tbl-wrap"><table>
+        <thead><tr><th>COMMAND</th><th>FLAG</th></tr></thead>
+        <tbody>${cmds.filter(c => c.command).map(c =>
+          `<tr>
+            <td style="font-size:11px;word-break:break-all">${esc(c.command)}</td>
+            <td>${c.suspicious ? '<span class="badge susp">MALICIOUS</span>' : '—'}</td>
+          </tr>`
+        ).join('')}</tbody>
+      </table></div>`;
+}
+
+function switchTab(name, el) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('tab-' + name).classList.add('active');
+}
+
+function esc(s) {
+  if (!s) return '';
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,26 @@
+version: "3.9"
+
+services:
+
+  vol3:
+    build:
+      context: ./volatility3
+    image: vol3
+    profiles: ["build"]
+
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    image: mfat-backend
+    ports:
+      - "5000:5000"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - mfat_dumps:/app/dump
+      - mfat_results:/app/results
+    restart: unless-stopped
+
+volumes:
+  mfat_dumps:
+  mfat_results:
