@@ -1,0 +1,1262 @@
+{
+  "meta": {
+    "vol_version": "v3",
+    "profile": null,
+    "image_name": "MemoryDump_Lab6.raw"
+  },
+  "summary": {
+    "total_processes": 53,
+    "suspicious_processes": 15,
+    "network_connections": 97,
+    "suspicious_connections": 0,
+    "malfind_hits": 0,
+    "suspicious_commands": 0,
+    "total_iocs": 15,
+    "high_iocs": 0
+  },
+  "iocs": [
+    {
+      "type": "Suspicious Process",
+      "severity": "MEDIUM",
+      "detail": "csrss.exe (PID 336)",
+      "description": "Process 'csrss.exe' is often abused by malware"
+    },
+    {
+      "type": "Suspicious Process",
+      "severity": "MEDIUM",
+      "detail": "csrss.exe (PID 396)",
+      "description": "Process 'csrss.exe' is often abused by malware"
+    },
+    {
+      "type": "Suspicious Process",
+      "severity": "MEDIUM",
+      "detail": "winlogon.exe (PID 436)",
+      "description": "Process 'winlogon.exe' is often abused by malware"
+    },
+    {
+      "type": "Suspicious Process",
+      "severity": "MEDIUM",
+      "detail": "lsass.exe (PID 496)",
+      "description": "Process 'lsass.exe' is often abused by malware"
+    },
+    {
+      "type": "Suspicious Process",
+      "severity": "MEDIUM",
+      "detail": "svchost.exe (PID 608)",
+      "description": "Process 'svchost.exe' is often abused by malware"
+    },
+    {
+      "type": "Suspicious Process",
+      "severity": "MEDIUM",
+      "detail": "svchost.exe (PID 724)",
+      "description": "Process 'svchost.exe' is often abused by malware"
+    },
+    {
+      "type": "Suspicious Process",
+      "severity": "MEDIUM",
+      "detail": "svchost.exe (PID 780)",
+      "description": "Process 'svchost.exe' is often abused by malware"
+    },
+    {
+      "type": "Suspicious Process",
+      "severity": "MEDIUM",
+      "detail": "svchost.exe (PID 896)",
+      "description": "Process 'svchost.exe' is often abused by malware"
+    },
+    {
+      "type": "Suspicious Process",
+      "severity": "MEDIUM",
+      "detail": "svchost.exe (PID 948)",
+      "description": "Process 'svchost.exe' is often abused by malware"
+    },
+    {
+      "type": "Suspicious Process",
+      "severity": "MEDIUM",
+      "detail": "svchost.exe (PID 400)",
+      "description": "Process 'svchost.exe' is often abused by malware"
+    },
+    {
+      "type": "Suspicious Process",
+      "severity": "MEDIUM",
+      "detail": "svchost.exe (PID 1052)",
+      "description": "Process 'svchost.exe' is often abused by malware"
+    },
+    {
+      "type": "Suspicious Process",
+      "severity": "MEDIUM",
+      "detail": "svchost.exe (PID 1212)",
+      "description": "Process 'svchost.exe' is often abused by malware"
+    },
+    {
+      "type": "Suspicious Process",
+      "severity": "MEDIUM",
+      "detail": "svchost.exe (PID 1308)",
+      "description": "Process 'svchost.exe' is often abused by malware"
+    },
+    {
+      "type": "Suspicious Process",
+      "severity": "MEDIUM",
+      "detail": "explorer.exe (PID 1944)",
+      "description": "Process 'explorer.exe' is often abused by malware"
+    },
+    {
+      "type": "Suspicious Process",
+      "severity": "MEDIUM",
+      "detail": "cmd.exe (PID 880)",
+      "description": "Process 'cmd.exe' is often abused by malware"
+    }
+  ],
+  "processes": [
+    {
+      "name": "System",
+      "pid": 4,
+      "ppid": 0,
+      "raw": "4\t0\tSystem\t0xfa80012a5040\t78\t495\tN/A\tFalse\t2019-08-19 14:40:07.000000 UTC\tN/A\tDisabled",
+      "suspicious": false
+    },
+    {
+      "name": "smss.exe",
+      "pid": 264,
+      "ppid": 4,
+      "raw": "264\t4\tsmss.exe\t0xfa8002971470\t2\t29\tN/A\tFalse\t2019-08-19 14:40:07.000000 UTC\tN/A\tDisabled",
+      "suspicious": false
+    },
+    {
+      "name": "csrss.exe",
+      "pid": 336,
+      "ppid": 328,
+      "raw": "336\t328\tcsrss.exe\t0xfa800234cb30\t10\t415\t0\tFalse\t2019-08-19 14:40:10.000000 UTC\tN/A\tDisabled",
+      "suspicious": true
+    },
+    {
+      "name": "wininit.exe",
+      "pid": 384,
+      "ppid": 328,
+      "raw": "384\t328\twininit.exe\t0xfa8002aae910\t3\t74\t0\tFalse\t2019-08-19 14:40:11.000000 UTC\tN/A\tDisabled",
+      "suspicious": false
+    },
+    {
+      "name": "csrss.exe",
+      "pid": 396,
+      "ppid": 376,
+      "raw": "396\t376\tcsrss.exe\t0xfa8002ab7060\t9\t499\t1\tFalse\t2019-08-19 14:40:11.000000 UTC\tN/A\tDisabled",
+      "suspicious": true
+    },
+    {
+      "name": "winlogon.exe",
+      "pid": 436,
+      "ppid": 376,
+      "raw": "436\t376\twinlogon.exe\t0xfa8002b66560\t6\t116\t1\tFalse\t2019-08-19 14:40:11.000000 UTC\tN/A\tDisabled",
+      "suspicious": true
+    },
+    {
+      "name": "services.exe",
+      "pid": 480,
+      "ppid": 384,
+      "raw": "480\t384\tservices.exe\t0xfa8002b99200\t9\t194\t0\tFalse\t2019-08-19 14:40:11.000000 UTC\tN/A\tDisabled",
+      "suspicious": false
+    },
+    {
+      "name": "lsass.exe",
+      "pid": 496,
+      "ppid": 384,
+      "raw": "496\t384\tlsass.exe\t0xfa8002bb4600\t7\t513\t0\tFalse\t2019-08-19 14:40:11.000000 UTC\tN/A\tDisabled",
+      "suspicious": true
+    },
+    {
+      "name": "lsm.exe",
+      "pid": 504,
+      "ppid": 384,
+      "raw": "504\t384\tlsm.exe\t0xfa80022ff910\t10\t152\t0\tFalse\t2019-08-19 14:40:11.000000 UTC\tN/A\tDisabled",
+      "suspicious": false
+    },
+    {
+      "name": "svchost.exe",
+      "pid": 608,
+      "ppid": 480,
+      "raw": "608\t480\tsvchost.exe\t0xfa8002ce8740\t10\t358\t0\tFalse\t2019-08-19 14:40:11.000000 UTC\tN/A\tDisabled",
+      "suspicious": true
+    },
+    {
+      "name": "VBoxService.ex",
+      "pid": 668,
+      "ppid": 480,
+      "raw": "668\t480\tVBoxService.ex\t0xfa8002d13060\t13\t136\t0\tFalse\t2019-08-19 14:40:11.000000 UTC\tN/A\tDisabled",
+      "suspicious": false
+    },
+    {
+      "name": "svchost.exe",
+      "pid": 724,
+      "ppid": 480,
+      "raw": "724\t480\tsvchost.exe\t0xfa8002d4bb30\t6\t257\t0\tFalse\t2019-08-19 14:40:11.000000 UTC\tN/A\tDisabled",
+      "suspicious": true
+    },
+    {
+      "name": "svchost.exe",
+      "pid": 780,
+      "ppid": 480,
+      "raw": "780\t480\tsvchost.exe\t0xfa8002d4fb30\t19\t405\t0\tFalse\t2019-08-19 14:40:11.000000 UTC\tN/A\tDisabled",
+      "suspicious": true
+    },
+    {
+      "name": "svchost.exe",
+      "pid": 896,
+      "ppid": 480,
+      "raw": "896\t480\tsvchost.exe\t0xfa8002dcf5f0\t22\t452\t0\tFalse\t2019-08-19 14:40:12.000000 UTC\tN/A\tDisabled",
+      "suspicious": true
+    },
+    {
+      "name": "svchost.exe",
+      "pid": 948,
+      "ppid": 480,
+      "raw": "948\t480\tsvchost.exe\t0xfa8002de1b30\t35\t893\t0\tFalse\t2019-08-19 14:40:12.000000 UTC\tN/A\tDisabled",
+      "suspicious": true
+    },
+    {
+      "name": "audiodg.exe",
+      "pid": 1008,
+      "ppid": 780,
+      "raw": "1008\t780\taudiodg.exe\t0xfa8002e0b1c0\t7\t132\t0\tFalse\t2019-08-19 14:40:12.000000 UTC\tN/A\tDisabled",
+      "suspicious": false
+    },
+    {
+      "name": "svchost.exe",
+      "pid": 400,
+      "ppid": 480,
+      "raw": "400\t480\tsvchost.exe\t0xfa8002e645f0\t13\t275\t0\tFalse\t2019-08-19 14:40:12.000000 UTC\tN/A\tDisabled",
+      "suspicious": true
+    },
+    {
+      "name": "svchost.exe",
+      "pid": 1052,
+      "ppid": 480,
+      "raw": "1052\t480\tsvchost.exe\t0xfa8002eac740\t17\t368\t0\tFalse\t2019-08-19 14:40:12.000000 UTC\tN/A\tDisabled",
+      "suspicious": true
+    },
+    {
+      "name": "spoolsv.exe",
+      "pid": 1176,
+      "ppid": 480,
+      "raw": "1176\t480\tspoolsv.exe\t0xfa8002e76b30\t14\t279\t0\tFalse\t2019-08-19 14:40:13.000000 UTC\tN/A\tDisabled",
+      "suspicious": false
+    },
+    {
+      "name": "svchost.exe",
+      "pid": 1212,
+      "ppid": 480,
+      "raw": "1212\t480\tsvchost.exe\t0xfa8002f4d780\t21\t311\t0\tFalse\t2019-08-19 14:40:13.000000 UTC\tN/A\tDisabled",
+      "suspicious": true
+    },
+    {
+      "name": "svchost.exe",
+      "pid": 1308,
+      "ppid": 480,
+      "raw": "1308\t480\tsvchost.exe\t0xfa8002f79b30\t17\t253\t0\tFalse\t2019-08-19 14:40:13.000000 UTC\tN/A\tDisabled",
+      "suspicious": true
+    },
+    {
+      "name": "taskhost.exe",
+      "pid": 1812,
+      "ppid": 480,
+      "raw": "1812\t480\ttaskhost.exe\t0xfa8003144250\t9\t147\t1\tFalse\t2019-08-19 14:40:18.000000 UTC\tN/A\tDisabled",
+      "suspicious": false
+    },
+    {
+      "name": "dwm.exe",
+      "pid": 1868,
+      "ppid": 896,
+      "raw": "1868\t896\tdwm.exe\t0xfa8003160120\t4\t70\t1\tFalse\t2019-08-19 14:40:18.000000 UTC\tN/A\tDisabled",
+      "suspicious": false
+    },
+    {
+      "name": "taskeng.exe",
+      "pid": 1876,
+      "ppid": 948,
+      "raw": "1876\t948\ttaskeng.exe\t0xfa8003164b30\t5\t81\t0\tFalse\t2019-08-19 14:40:18.000000 UTC\tN/A\tDisabled",
+      "suspicious": false
+    },
+    {
+      "name": "explorer.exe",
+      "pid": 1944,
+      "ppid": 1844,
+      "raw": "1944\t1844\texplorer.exe\t0xfa800319a060\t35\t894\t1\tFalse\t2019-08-19 14:40:19.000000 UTC\tN/A\tDisabled",
+      "suspicious": true
+    },
+    {
+      "name": "GoogleCrashHan",
+      "pid": 1292,
+      "ppid": 1928,
+      "raw": "1292\t1928\tGoogleCrashHan\t0xfa8003227060\t7\t105\t0\tTrue\t2019-08-19 14:40:19.000000 UTC\tN/A\tDisabled",
+      "suspicious": false
+    },
+    {
+      "name": "GoogleCrashHan",
+      "pid": 924,
+      "ppid": 1928,
+      "raw": "924\t1928\tGoogleCrashHan\t0xfa8003219060\t6\t93\t0\tFalse\t2019-08-19 14:40:19.000000 UTC\tN/A\tDisabled",
+      "suspicious": false
+    },
+    {
+      "name": "VBoxTray.exe",
+      "pid": 1108,
+      "ppid": 1944,
+      "raw": "1108\t1944\tVBoxTray.exe\t0xfa8003277810\t14\t139\t1\tFalse\t2019-08-19 14:40:20.000000 UTC\tN/A\tDisabled",
+      "suspicious": false
+    },
+    {
+      "name": "cmd.exe",
+      "pid": 880,
+      "ppid": 1944,
+      "raw": "880\t1944\tcmd.exe\t0xfa8002324b30\t1\t21\t1\tFalse\t2019-08-19 14:40:26.000000 UTC\tN/A\tDisabled",
+      "suspicious": true
+    },
+    {
+      "name": "conhost.exe",
+      "pid": 916,
+      "ppid": 396,
+      "raw": "916\t396\tconhost.exe\t0xfa800231e370\t3\t50\t1\tFalse\t2019-08-19 14:40:26.000000 UTC\tN/A\tDisabled",
+      "suspicious": false
+    },
+    {
+      "name": "SearchIndexer.",
+      "pid": 856,
+      "ppid": 480,
+      "raw": "856\t480\tSearchIndexer.\t0xfa8003315060\t13\t689\t0\tFalse\t2019-08-19 14:40:27.000000 UTC\tN/A\tDisabled",
+      "suspicious": false
+    },
+    {
+      "name": "chrome.exe",
+      "pid": 2124,
+      "ppid": 1944,
+      "raw": "2124\t1944\tchrome.exe\t0xfa800234eb30\t27\t662\t1\tFalse\t2019-08-19 14:40:46.000000 UTC\tN/A\tDisabled",
+      "suspicious": false
+    },
+    {
+      "name": "chrome.exe",
+      "pid": 2132,
+      "ppid": 2124,
+      "raw": "2132\t2124\tchrome.exe\t0xfa800234f780\t9\t75\t1\tFalse\t2019-08-19 14:40:46.000000 UTC\tN/A\tDisabled",
+      "suspicious": false
+    },
+    {
+      "name": "chrome.exe",
+      "pid": 2168,
+      "ppid": 2124,
+      "raw": "2168\t2124\tchrome.exe\t0xfa800314fab0\t3\t55\t1\tFalse\t2019-08-19 14:40:49.000000 UTC\tN/A\tDisabled",
+      "suspicious": false
+    },
+    {
+      "name": "WmiPrvSE.exe",
+      "pid": 2292,
+      "ppid": 608,
+      "raw": "2292\t608\tWmiPrvSE.exe\t0xfa80032d9060\t13\t288\t0\tFalse\t2019-08-19 14:40:52.000000 UTC\tN/A\tDisabled",
+      "suspicious": false
+    },
+    {
+      "name": "chrome.exe",
+      "pid": 2340,
+      "ppid": 2124,
+      "raw": "2340\t2124\tchrome.exe\t0xfa80032f9a70\t12\t282\t1\tFalse\t2019-08-19 14:40:52.000000 UTC\tN/A\tDisabled",
+      "suspicious": false
+    },
+    {
+      "name": "chrome.exe",
+      "pid": 2440,
+      "ppid": 2124,
+      "raw": "2440\t2124\tchrome.exe\t0xfa8003741b30\t13\t263\t1\tFalse\t2019-08-19 14:40:54.000000 UTC\tN/A\tDisabled",
+      "suspicious": false
+    },
+    {
+      "name": "chrome.exe",
+      "pid": 2452,
+      "ppid": 2124,
+      "raw": "2452\t2124\tchrome.exe\t0xfa800374bb30\t14\t167\t1\tFalse\t2019-08-19 14:40:54.000000 UTC\tN/A\tDisabled",
+      "suspicious": false
+    },
+    {
+      "name": "WmiApSrv.exe",
+      "pid": 2800,
+      "ppid": 480,
+      "raw": "2800\t480\tWmiApSrv.exe\t0xfa8002b74060\t6\t115\t0\tFalse\t2019-08-19 14:40:57.000000 UTC\tN/A\tDisabled",
+      "suspicious": false
+    },
+    {
+      "name": "WmiPrvSE.exe",
+      "pid": 2896,
+      "ppid": 608,
+      "raw": "2896\t608\tWmiPrvSE.exe\t0xfa8002d9eab0\t7\t124\t0\tFalse\t2019-08-19 14:40:57.000000 UTC\tN/A\tDisabled",
+      "suspicious": false
+    },
+    {
+      "name": "chrome.exe",
+      "pid": 2940,
+      "ppid": 2124,
+      "raw": "2940\t2124\tchrome.exe\t0xfa80032d4380\t9\t172\t1\tFalse\t2019-08-19 14:41:06.000000 UTC\tN/A\tDisabled",
+      "suspicious": false
+    },
+    {
+      "name": "firefox.exe",
+      "pid": 2080,
+      "ppid": 3060,
+      "raw": "2080\t3060\tfirefox.exe\t0xfa8003905b30\t59\t970\t1\tTrue\t2019-08-19 14:41:08.000000 UTC\tN/A\tDisabled",
+      "suspicious": false
+    },
+    {
+      "name": "firefox.exe",
+      "pid": 2860,
+      "ppid": 2080,
+      "raw": "2860\t2080\tfirefox.exe\t0xfa80021fa630\t11\t210\t1\tTrue\t2019-08-19 14:41:09.000000 UTC\tN/A\tDisabled",
+      "suspicious": false
+    },
+    {
+      "name": "firefox.exe",
+      "pid": 3016,
+      "ppid": 2080,
+      "raw": "3016\t2080\tfirefox.exe\t0xfa80013a4580\t31\t413\t1\tTrue\t2019-08-19 14:41:10.000000 UTC\tN/A\tDisabled",
+      "suspicious": false
+    },
+    {
+      "name": "firefox.exe",
+      "pid": 2968,
+      "ppid": 2080,
+      "raw": "2968\t2080\tfirefox.exe\t0xfa8001415b30\t22\t323\t1\tTrue\t2019-08-19 14:41:11.000000 UTC\tN/A\tDisabled",
+      "suspicious": false
+    },
+    {
+      "name": "firefox.exe",
+      "pid": 3316,
+      "ppid": 2080,
+      "raw": "3316\t2080\tfirefox.exe\t0xfa8001454b30\t21\t307\t1\tTrue\t2019-08-19 14:41:13.000000 UTC\tN/A\tDisabled",
+      "suspicious": false
+    },
+    {
+      "name": "WinRAR.exe",
+      "pid": 3716,
+      "ppid": 1944,
+      "raw": "3716\t1944\tWinRAR.exe\t0xfa80035e71e0\t7\t201\t1\tFalse\t2019-08-19 14:41:43.000000 UTC\tN/A\tDisabled",
+      "suspicious": false
+    },
+    {
+      "name": "DumpIt.exe",
+      "pid": 4084,
+      "ppid": 1944,
+      "raw": "4084\t1944\tDumpIt.exe\t0xfa800156e400\t5\t46\t1\tTrue\t2019-08-19 14:41:55.000000 UTC\tN/A\tDisabled",
+      "suspicious": false
+    },
+    {
+      "name": "conhost.exe",
+      "pid": 4092,
+      "ppid": 396,
+      "raw": "4092\t396\tconhost.exe\t0xfa80014c1060\t2\t50\t1\tFalse\t2019-08-19 14:41:55.000000 UTC\tN/A\tDisabled",
+      "suspicious": false
+    },
+    {
+      "name": "sppsvc.exe",
+      "pid": 1224,
+      "ppid": 480,
+      "raw": "1224\t480\tsppsvc.exe\t0xfa80014aa060\t5\t0\t0\tFalse\t2019-08-19 14:42:39.000000 UTC\tN/A\tDisabled",
+      "suspicious": false
+    },
+    {
+      "name": "GoogleUpdate.e",
+      "pid": 2256,
+      "ppid": 2396,
+      "raw": "2256\t2396\tGoogleUpdate.e\t0xfa800157eb30\t3\t118\t0\tTrue\t2019-08-19 14:42:40.000000 UTC\tN/A\tDisabled",
+      "suspicious": false
+    },
+    {
+      "name": "GoogleCrashHan",
+      "pid": 1192,
+      "ppid": 2256,
+      "raw": "1192\t2256\tGoogleCrashHan\t0xfa80014f9060\t3\t46\t0\tTrue\t2019-08-19 14:42:41.000000 UTC\tN/A\tDisabled",
+      "suspicious": false
+    },
+    {
+      "name": "GoogleCrashHan",
+      "pid": 864,
+      "ppid": 2256,
+      "raw": "864\t2256\tGoogleCrashHan\t0xfa80035e3700\t1\t1279459345\t0\tFalse\t2019-08-19 14:42:41.000000 UTC\tN/A\tDisabled",
+      "suspicious": false
+    }
+  ],
+  "connections": [
+    {
+      "proto": "TCPv4",
+      "local": "127.0.0.1",
+      "remote": "49171",
+      "state": "127.0.0.1",
+      "raw": "0x53f2010\tTCPv4\t127.0.0.1\t49171\t127.0.0.1\t49170\tESTABLISHED\t2968\tfirefox.exe\tN/A",
+      "suspicious_port": false
+    },
+    {
+      "proto": "TCPv4",
+      "local": "127.0.0.1",
+      "remote": "49170",
+      "state": "127.0.0.1",
+      "raw": "0x53f2a90\tTCPv4\t127.0.0.1\t49170\t127.0.0.1\t49171\tESTABLISHED\t2968\tfirefox.exe\tN/A",
+      "suspicious_port": false
+    },
+    {
+      "proto": "UDPv4",
+      "local": "127.0.0.1",
+      "remote": "58500",
+      "state": "*",
+      "raw": "0x5d80d9f0\tUDPv4\t127.0.0.1\t58500\t*\t0\t\t1308\tsvchost.exe\t2019-08-19 14:42:39.000000 UTC",
+      "suspicious_port": false
+    },
+    {
+      "proto": "UDPv4",
+      "local": "0.0.0.0",
+      "remote": "5353",
+      "state": "*",
+      "raw": "0x5d8c3360\tUDPv4\t0.0.0.0\t5353\t*\t0\t\t2124\tchrome.exe\t2019-08-19 14:40:55.000000 UTC",
+      "suspicious_port": false
+    },
+    {
+      "proto": "UDPv6",
+      "local": "::",
+      "remote": "5353",
+      "state": "*",
+      "raw": "0x5d8c3360\tUDPv6\t::\t5353\t*\t0\t\t2124\tchrome.exe\t2019-08-19 14:40:55.000000 UTC",
+      "suspicious_port": false
+    },
+    {
+      "proto": "UDPv4",
+      "local": "0.0.0.0",
+      "remote": "5353",
+      "state": "*",
+      "raw": "0x5d8c3ec0\tUDPv4\t0.0.0.0\t5353\t*\t0\t\t2124\tchrome.exe\t2019-08-19 14:40:55.000000 UTC",
+      "suspicious_port": false
+    },
+    {
+      "proto": "TCPv4",
+      "local": "10.0.2.15",
+      "remote": "49232",
+      "state": "172.217.160.131",
+      "raw": "0x5d8d8500\tTCPv4\t10.0.2.15\t49232\t172.217.160.131\t80\tESTABLISHED\t2080\tfirefox.exe\tN/A",
+      "suspicious_port": false
+    },
+    {
+      "proto": "TCPv4",
+      "local": "127.0.0.1",
+      "remote": "49166",
+      "state": "127.0.0.1",
+      "raw": "0x5d8e7b90\tTCPv4\t127.0.0.1\t49166\t127.0.0.1\t49165\tESTABLISHED\t2080\tfirefox.exe\tN/A",
+      "suspicious_port": false
+    },
+    {
+      "proto": "TCPv4",
+      "local": "10.0.2.15",
+      "remote": "49235",
+      "state": "172.217.194.189",
+      "raw": "0x5d8e9010\tTCPv4\t10.0.2.15\t49235\t172.217.194.189\t443\tESTABLISHED\t2080\tfirefox.exe\tN/A",
+      "suspicious_port": false
+    },
+    {
+      "proto": "TCPv4",
+      "local": "10.0.2.15",
+      "remote": "49196",
+      "state": "172.217.160.133",
+      "raw": "0x5d9705f0\tTCPv4\t10.0.2.15\t49196\t172.217.160.133\t443\tESTABLISHED\t2080\tfirefox.exe\tN/A",
+      "suspicious_port": false
+    },
+    {
+      "proto": "TCPv4",
+      "local": "10.0.2.15",
+      "remote": "49198",
+      "state": "216.58.197.67",
+      "raw": "0x5dadd860\tTCPv4\t10.0.2.15\t49198\t216.58.197.67\t443\tESTABLISHED\t2080\tfirefox.exe\tN/A",
+      "suspicious_port": false
+    },
+    {
+      "proto": "TCPv4",
+      "local": "127.0.0.1",
+      "remote": "49165",
+      "state": "127.0.0.1",
+      "raw": "0x5daeb850\tTCPv4\t127.0.0.1\t49165\t127.0.0.1\t49166\tESTABLISHED\t2080\tfirefox.exe\tN/A",
+      "suspicious_port": false
+    },
+    {
+      "proto": "TCPv4",
+      "local": "10.0.2.15",
+      "remote": "49224",
+      "state": "172.217.163.205",
+      "raw": "0x5dafccf0\tTCPv4\t10.0.2.15\t49224\t172.217.163.205\t443\tESTABLISHED\t2080\tfirefox.exe\tN/A",
+      "suspicious_port": false
+    },
+    {
+      "proto": "TCPv4",
+      "local": "10.0.2.15",
+      "remote": "49234",
+      "state": "172.217.163.106",
+      "raw": "0x5dde8680\tTCPv4\t10.0.2.15\t49234\t172.217.163.106\t443\tESTABLISHED\t2080\tfirefox.exe\tN/A",
+      "suspicious_port": false
+    },
+    {
+      "proto": "TCPv4",
+      "local": "10.0.2.15",
+      "remote": "49202",
+      "state": "216.58.196.163",
+      "raw": "0x5ddf9010\tTCPv4\t10.0.2.15\t49202\t216.58.196.163\t443\tESTABLISHED\t2080\tfirefox.exe\tN/A",
+      "suspicious_port": false
+    },
+    {
+      "proto": "TCPv4",
+      "local": "0.0.0.0",
+      "remote": "49156",
+      "state": "0.0.0.0",
+      "raw": "0x5de48b50\tTCPv4\t0.0.0.0\t49156\t0.0.0.0\t0\tLISTENING\t496\tlsass.exe\t-",
+      "suspicious_port": false
+    },
+    {
+      "proto": "TCPv4",
+      "local": "0.0.0.0",
+      "remote": "5357",
+      "state": "0.0.0.0",
+      "raw": "0x5e0663e0\tTCPv4\t0.0.0.0\t5357\t0.0.0.0\t0\tLISTENING\t4\tSystem\t-",
+      "suspicious_port": false
+    },
+    {
+      "proto": "TCPv6",
+      "local": "::",
+      "remote": "5357",
+      "state": "::",
+      "raw": "0x5e0663e0\tTCPv6\t::\t5357\t::\t0\tLISTENING\t4\tSystem\t-",
+      "suspicious_port": false
+    },
+    {
+      "proto": "UDPv4",
+      "local": "0.0.0.0",
+      "remote": "64930",
+      "state": "*",
+      "raw": "0x5e06b010\tUDPv4\t0.0.0.0\t64930\t*\t0\t\t1308\tsvchost.exe\t2019-08-19 14:40:13.000000 UTC",
+      "suspicious_port": false
+    },
+    {
+      "proto": "UDPv4",
+      "local": "0.0.0.0",
+      "remote": "64931",
+      "state": "*",
+      "raw": "0x5e06b620\tUDPv4\t0.0.0.0\t64931\t*\t0\t\t1308\tsvchost.exe\t2019-08-19 14:40:13.000000 UTC",
+      "suspicious_port": false
+    },
+    {
+      "proto": "UDPv6",
+      "local": "::",
+      "remote": "64931",
+      "state": "*",
+      "raw": "0x5e06b620\tUDPv6\t::\t64931\t*\t0\t\t1308\tsvchost.exe\t2019-08-19 14:40:13.000000 UTC",
+      "suspicious_port": false
+    },
+    {
+      "proto": "UDPv4",
+      "local": "0.0.0.0",
+      "remote": "3702",
+      "state": "*",
+      "raw": "0x5e07c670\tUDPv4\t0.0.0.0\t3702\t*\t0\t\t1308\tsvchost.exe\t2019-08-19 14:40:17.000000 UTC",
+      "suspicious_port": false
+    },
+    {
+      "proto": "UDPv6",
+      "local": "::",
+      "remote": "3702",
+      "state": "*",
+      "raw": "0x5e07c670\tUDPv6\t::\t3702\t*\t0\t\t1308\tsvchost.exe\t2019-08-19 14:40:17.000000 UTC",
+      "suspicious_port": false
+    },
+    {
+      "proto": "TCPv4",
+      "local": "0.0.0.0",
+      "remote": "445",
+      "state": "0.0.0.0",
+      "raw": "0x5e08e2d0\tTCPv4\t0.0.0.0\t445\t0.0.0.0\t0\tLISTENING\t4\tSystem\t-",
+      "suspicious_port": false
+    },
+    {
+      "proto": "TCPv6",
+      "local": "::",
+      "remote": "445",
+      "state": "::",
+      "raw": "0x5e08e2d0\tTCPv6\t::\t445\t::\t0\tLISTENING\t4\tSystem\t-",
+      "suspicious_port": false
+    },
+    {
+      "proto": "TCPv4",
+      "local": "0.0.0.0",
+      "remote": "49155",
+      "state": "0.0.0.0",
+      "raw": "0x5e0a85d0\tTCPv4\t0.0.0.0\t49155\t0.0.0.0\t0\tLISTENING\t480\tservices.exe\t-",
+      "suspicious_port": false
+    },
+    {
+      "proto": "TCPv6",
+      "local": "::",
+      "remote": "49155",
+      "state": "::",
+      "raw": "0x5e0a85d0\tTCPv6\t::\t49155\t::\t0\tLISTENING\t480\tservices.exe\t-",
+      "suspicious_port": false
+    },
+    {
+      "proto": "UDPv4",
+      "local": "127.0.0.1",
+      "remote": "56645",
+      "state": "*",
+      "raw": "0x5e0dbcb0\tUDPv4\t127.0.0.1\t56645\t*\t0\t\t1052\tsvchost.exe\t2019-08-19 14:40:17.000000 UTC",
+      "suspicious_port": false
+    },
+    {
+      "proto": "TCPv4",
+      "local": "10.0.2.15",
+      "remote": "139",
+      "state": "0.0.0.0",
+      "raw": "0x5e109890\tTCPv4\t10.0.2.15\t139\t0.0.0.0\t0\tLISTENING\t4\tSystem\t-",
+      "suspicious_port": false
+    },
+    {
+      "proto": "UDPv4",
+      "local": "10.0.2.15",
+      "remote": "137",
+      "state": "*",
+      "raw": "0x5e10ab80\tUDPv4\t10.0.2.15\t137\t*\t0\t\t4\tSystem\t2019-08-19 14:40:17.000000 UTC",
+      "suspicious_port": false
+    },
+    {
+      "proto": "UDPv4",
+      "local": "10.0.2.15",
+      "remote": "138",
+      "state": "*",
+      "raw": "0x5e10baa0\tUDPv4\t10.0.2.15\t138\t*\t0\t\t4\tSystem\t2019-08-19 14:40:17.000000 UTC",
+      "suspicious_port": false
+    },
+    {
+      "proto": "UDPv4",
+      "local": "0.0.0.0",
+      "remote": "3702",
+      "state": "*",
+      "raw": "0x5e114010\tUDPv4\t0.0.0.0\t3702\t*\t0\t\t1308\tsvchost.exe\t2019-08-19 14:40:17.000000 UTC",
+      "suspicious_port": false
+    },
+    {
+      "proto": "UDPv4",
+      "local": "0.0.0.0",
+      "remote": "0",
+      "state": "*",
+      "raw": "0x5e12c5d0\tUDPv4\t0.0.0.0\t0\t*\t0\t\t1052\tsvchost.exe\t2019-08-19 14:40:17.000000 UTC",
+      "suspicious_port": false
+    },
+    {
+      "proto": "UDPv6",
+      "local": "::",
+      "remote": "0",
+      "state": "*",
+      "raw": "0x5e12c5d0\tUDPv6\t::\t0\t*\t0\t\t1052\tsvchost.exe\t2019-08-19 14:40:17.000000 UTC",
+      "suspicious_port": false
+    },
+    {
+      "proto": "UDPv4",
+      "local": "0.0.0.0",
+      "remote": "3702",
+      "state": "*",
+      "raw": "0x5e135c40\tUDPv4\t0.0.0.0\t3702\t*\t0\t\t1308\tsvchost.exe\t2019-08-19 14:40:17.000000 UTC",
+      "suspicious_port": false
+    },
+    {
+      "proto": "UDPv6",
+      "local": "::",
+      "remote": "3702",
+      "state": "*",
+      "raw": "0x5e135c40\tUDPv6\t::\t3702\t*\t0\t\t1308\tsvchost.exe\t2019-08-19 14:40:17.000000 UTC",
+      "suspicious_port": false
+    },
+    {
+      "proto": "UDPv4",
+      "local": "0.0.0.0",
+      "remote": "3702",
+      "state": "*",
+      "raw": "0x5e135dc0\tUDPv4\t0.0.0.0\t3702\t*\t0\t\t1308\tsvchost.exe\t2019-08-19 14:40:17.000000 UTC",
+      "suspicious_port": false
+    },
+    {
+      "proto": "UDPv4",
+      "local": "0.0.0.0",
+      "remote": "5355",
+      "state": "*",
+      "raw": "0x5e1379c0\tUDPv4\t0.0.0.0\t5355\t*\t0\t\t1052\tsvchost.exe\t2019-08-19 14:40:20.000000 UTC",
+      "suspicious_port": false
+    },
+    {
+      "proto": "UDPv6",
+      "local": "::",
+      "remote": "5355",
+      "state": "*",
+      "raw": "0x5e1379c0\tUDPv6\t::\t5355\t*\t0\t\t1052\tsvchost.exe\t2019-08-19 14:40:20.000000 UTC",
+      "suspicious_port": false
+    },
+    {
+      "proto": "UDPv4",
+      "local": "0.0.0.0",
+      "remote": "5355",
+      "state": "*",
+      "raw": "0x5e2be2e0\tUDPv4\t0.0.0.0\t5355\t*\t0\t\t1052\tsvchost.exe\t2019-08-19 14:40:20.000000 UTC",
+      "suspicious_port": false
+    },
+    {
+      "proto": "TCPv4",
+      "local": "0.0.0.0",
+      "remote": "49154",
+      "state": "0.0.0.0",
+      "raw": "0x5e2beb30\tTCPv4\t0.0.0.0\t49154\t0.0.0.0\t0\tLISTENING\t948\tsvchost.exe\t-",
+      "suspicious_port": false
+    },
+    {
+      "proto": "TCPv4",
+      "local": "10.0.2.15",
+      "remote": "49231",
+      "state": "172.217.160.131",
+      "raw": "0x5e2fc550\tTCPv4\t10.0.2.15\t49231\t172.217.160.131\t80\tESTABLISHED\t2080\tfirefox.exe\tN/A",
+      "suspicious_port": false
+    },
+    {
+      "proto": "TCPv4",
+      "local": "0.0.0.0",
+      "remote": "49154",
+      "state": "0.0.0.0",
+      "raw": "0x5e3037b0\tTCPv4\t0.0.0.0\t49154\t0.0.0.0\t0\tLISTENING\t948\tsvchost.exe\t-",
+      "suspicious_port": false
+    },
+    {
+      "proto": "TCPv6",
+      "local": "::",
+      "remote": "49154",
+      "state": "::",
+      "raw": "0x5e3037b0\tTCPv6\t::\t49154\t::\t0\tLISTENING\t948\tsvchost.exe\t-",
+      "suspicious_port": false
+    },
+    {
+      "proto": "TCPv4",
+      "local": "0.0.0.0",
+      "remote": "49155",
+      "state": "0.0.0.0",
+      "raw": "0x5e31f900\tTCPv4\t0.0.0.0\t49155\t0.0.0.0\t0\tLISTENING\t480\tservices.exe\t-",
+      "suspicious_port": false
+    },
+    {
+      "proto": "TCPv4",
+      "local": "0.0.0.0",
+      "remote": "49152",
+      "state": "0.0.0.0",
+      "raw": "0x5e51fd20\tTCPv4\t0.0.0.0\t49152\t0.0.0.0\t0\tLISTENING\t384\twininit.exe\t-",
+      "suspicious_port": false
+    },
+    {
+      "proto": "TCPv4",
+      "local": "0.0.0.0",
+      "remote": "135",
+      "state": "0.0.0.0",
+      "raw": "0x5e559ef0\tTCPv4\t0.0.0.0\t135\t0.0.0.0\t0\tLISTENING\t724\tsvchost.exe\t-",
+      "suspicious_port": false
+    },
+    {
+      "proto": "TCPv4",
+      "local": "0.0.0.0",
+      "remote": "135",
+      "state": "0.0.0.0",
+      "raw": "0x5e55cef0\tTCPv4\t0.0.0.0\t135\t0.0.0.0\t0\tLISTENING\t724\tsvchost.exe\t-",
+      "suspicious_port": false
+    },
+    {
+      "proto": "TCPv6",
+      "local": "::",
+      "remote": "135",
+      "state": "::",
+      "raw": "0x5e55cef0\tTCPv6\t::\t135\t::\t0\tLISTENING\t724\tsvchost.exe\t-",
+      "suspicious_port": false
+    },
+    {
+      "proto": "TCPv4",
+      "local": "0.0.0.0",
+      "remote": "49152",
+      "state": "0.0.0.0",
+      "raw": "0x5e56a3c0\tTCPv4\t0.0.0.0\t49152\t0.0.0.0\t0\tLISTENING\t384\twininit.exe\t-",
+      "suspicious_port": false
+    },
+    {
+      "proto": "TCPv6",
+      "local": "::",
+      "remote": "49152",
+      "state": "::",
+      "raw": "0x5e56a3c0\tTCPv6\t::\t49152\t::\t0\tLISTENING\t384\twininit.exe\t-",
+      "suspicious_port": false
+    },
+    {
+      "proto": "TCPv4",
+      "local": "0.0.0.0",
+      "remote": "49156",
+      "state": "0.0.0.0",
+      "raw": "0x5e5add20\tTCPv4\t0.0.0.0\t49156\t0.0.0.0\t0\tLISTENING\t496\tlsass.exe\t-",
+      "suspicious_port": false
+    },
+    {
+      "proto": "TCPv6",
+      "local": "::",
+      "remote": "49156",
+      "state": "::",
+      "raw": "0x5e5add20\tTCPv6\t::\t49156\t::\t0\tLISTENING\t496\tlsass.exe\t-",
+      "suspicious_port": false
+    },
+    {
+      "proto": "TCPv4",
+      "local": "0.0.0.0",
+      "remote": "49153",
+      "state": "0.0.0.0",
+      "raw": "0x5e5d2e30\tTCPv4\t0.0.0.0\t49153\t0.0.0.0\t0\tLISTENING\t780\tsvchost.exe\t-",
+      "suspicious_port": false
+    },
+    {
+      "proto": "TCPv4",
+      "local": "0.0.0.0",
+      "remote": "49153",
+      "state": "0.0.0.0",
+      "raw": "0x5e5d3950\tTCPv4\t0.0.0.0\t49153\t0.0.0.0\t0\tLISTENING\t780\tsvchost.exe\t-",
+      "suspicious_port": false
+    },
+    {
+      "proto": "TCPv6",
+      "local": "::",
+      "remote": "49153",
+      "state": "::",
+      "raw": "0x5e5d3950\tTCPv6\t::\t49153\t::\t0\tLISTENING\t780\tsvchost.exe\t-",
+      "suspicious_port": false
+    },
+    {
+      "proto": "TCPv4",
+      "local": "10.0.2.15",
+      "remote": "49240",
+      "state": "172.217.167.138",
+      "raw": "0x5ee7fcf0\tTCPv4\t10.0.2.15\t49240\t172.217.167.138\t443\tESTABLISHED\t2080\tfirefox.exe\tN/A",
+      "suspicious_port": false
+    },
+    {
+      "proto": "TCPv4",
+      "local": "10.0.2.15",
+      "remote": "49172",
+      "state": "54.149.112.164",
+      "raw": "0x5fc0dcf0\tTCPv4\t10.0.2.15\t49172\t54.149.112.164\t443\tESTABLISHED\t2080\tfirefox.exe\tN/A",
+      "suspicious_port": false
+    },
+    {
+      "proto": "TCPv4",
+      "local": "10.0.2.15",
+      "remote": "49182",
+      "state": "117.18.237.29",
+      "raw": "0x5fc13010\tTCPv4\t10.0.2.15\t49182\t117.18.237.29\t80\tESTABLISHED\t2080\tfirefox.exe\tN/A",
+      "suspicious_port": false
+    },
+    {
+      "proto": "TCPv4",
+      "local": "10.0.2.15",
+      "remote": "49241",
+      "state": "52.24.89.101",
+      "raw": "0x5fc13cf0\tTCPv4\t10.0.2.15\t49241\t52.24.89.101\t443\tESTABLISHED\t2080\tfirefox.exe\tN/A",
+      "suspicious_port": false
+    },
+    {
+      "proto": "TCPv4",
+      "local": "10.0.2.15",
+      "remote": "49200",
+      "state": "172.217.163.33",
+      "raw": "0x5fc24010\tTCPv4\t10.0.2.15\t49200\t172.217.163.33\t443\tESTABLISHED\t2080\tfirefox.exe\tN/A",
+      "suspicious_port": false
+    },
+    {
+      "proto": "TCPv4",
+      "local": "127.0.0.1",
+      "remote": "49167",
+      "state": "127.0.0.1",
+      "raw": "0x5fc2e300\tTCPv4\t127.0.0.1\t49167\t127.0.0.1\t49168\tESTABLISHED\t3016\tfirefox.exe\tN/A",
+      "suspicious_port": false
+    },
+    {
+      "proto": "TCPv4",
+      "local": "127.0.0.1",
+      "remote": "49168",
+      "state": "127.0.0.1",
+      "raw": "0x5fc303d0\tTCPv4\t127.0.0.1\t49168\t127.0.0.1\t49167\tESTABLISHED\t3016\tfirefox.exe\tN/A",
+      "suspicious_port": false
+    },
+    {
+      "proto": "TCPv4",
+      "local": "10.0.2.15",
+      "remote": "49169",
+      "state": "23.195.74.19",
+      "raw": "0x5fc3a010\tTCPv4\t10.0.2.15\t49169\t23.195.74.19\t80\tESTABLISHED\t2080\tfirefox.exe\tN/A",
+      "suspicious_port": false
+    },
+    {
+      "proto": "TCPv6",
+      "local": "-",
+      "remote": "0",
+      "state": "381b:de02:80fa:ffff:381b:de02:80fa:ffff",
+      "raw": "0x5fc43640\tTCPv6\t-\t0\t381b:de02:80fa:ffff:381b:de02:80fa:ffff\t0\tCLOSED\t2080\tfirefox.exe\tN/A",
+      "suspicious_port": false
+    },
+    {
+      "proto": "TCPv4",
+      "local": "-",
+      "remote": "0",
+      "state": "56.27.222.2",
+      "raw": "0x5fc49700\tTCPv4\t-\t0\t56.27.222.2\t0\tCLOSED\t2080\tfirefox.exe\tN/A",
+      "suspicious_port": false
+    },
+    {
+      "proto": "TCPv4",
+      "local": "10.0.2.15",
+      "remote": "49178",
+      "state": "117.18.237.29",
+      "raw": "0x5fc4e810\tTCPv4\t10.0.2.15\t49178\t117.18.237.29\t80\tESTABLISHED\t2080\tfirefox.exe\tN/A",
+      "suspicious_port": false
+    },
+    {
+      "proto": "TCPv4",
+      "local": "10.0.2.15",
+      "remote": "49179",
+      "state": "117.18.237.29",
+      "raw": "0x5fc52940\tTCPv4\t10.0.2.15\t49179\t117.18.237.29\t80\tESTABLISHED\t2080\tfirefox.exe\tN/A",
+      "suspicious_port": false
+    },
+    {
+      "proto": "TCPv4",
+      "local": "127.0.0.1",
+      "remote": "49186",
+      "state": "127.0.0.1",
+      "raw": "0x5fc81810\tTCPv4\t127.0.0.1\t49186\t127.0.0.1\t49185\tESTABLISHED\t3316\tfirefox.exe\tN/A",
+      "suspicious_port": false
+    },
+    {
+      "proto": "TCPv4",
+      "local": "127.0.0.1",
+      "remote": "49185",
+      "state": "127.0.0.1",
+      "raw": "0x5fc869e0\tTCPv4\t127.0.0.1\t49185\t127.0.0.1\t49186\tESTABLISHED\t3316\tfirefox.exe\tN/A",
+      "suspicious_port": false
+    },
+    {
+      "proto": "TCPv4",
+      "local": "10.0.2.15",
+      "remote": "49195",
+      "state": "172.217.160.131",
+      "raw": "0x5fc94770\tTCPv4\t10.0.2.15\t49195\t172.217.160.131\t80\tESTABLISHED\t2080\tfirefox.exe\tN/A",
+      "suspicious_port": false
+    },
+    {
+      "proto": "TCPv4",
+      "local": "10.0.2.15",
+      "remote": "49193",
+      "state": "172.217.160.131",
+      "raw": "0x5fc989d0\tTCPv4\t10.0.2.15\t49193\t172.217.160.131\t80\tESTABLISHED\t2080\tfirefox.exe\tN/A",
+      "suspicious_port": false
+    },
+    {
+      "proto": "TCPv4",
+      "local": "10.0.2.15",
+      "remote": "49191",
+      "state": "172.217.163.100",
+      "raw": "0x5fca7cf0\tTCPv4\t10.0.2.15\t49191\t172.217.163.100\t443\tESTABLISHED\t2080\tfirefox.exe\tN/A",
+      "suspicious_port": false
+    },
+    {
+      "proto": "TCPv4",
+      "local": "10.0.2.15",
+      "remote": "49214",
+      "state": "172.217.160.131",
+      "raw": "0x5fcbe5b0\tTCPv4\t10.0.2.15\t49214\t172.217.160.131\t80\tFIN_WAIT2\t2080\tfirefox.exe\tN/A",
+      "suspicious_port": false
+    },
+    {
+      "proto": "TCPv4",
+      "local": "10.0.2.15",
+      "remote": "49228",
+      "state": "172.217.163.106",
+      "raw": "0x5fcbeb30\tTCPv4\t10.0.2.15\t49228\t172.217.163.106\t443\tESTABLISHED\t2080\tfirefox.exe\tN/A",
+      "suspicious_port": false
+    },
+    {
+      "proto": "TCPv4",
+      "local": "10.0.2.15",
+      "remote": "49203",
+      "state": "172.217.160.131",
+      "raw": "0x5fccd010\tTCPv4\t10.0.2.15\t49203\t172.217.160.131\t80\tESTABLISHED\t2080\tfirefox.exe\tN/A",
+      "suspicious_port": false
+    },
+    {
+      "proto": "TCPv4",
+      "local": "10.0.2.15",
+      "remote": "49225",
+      "state": "172.217.163.110",
+      "raw": "0x5fccd5e0\tTCPv4\t10.0.2.15\t49225\t172.217.163.110\t443\tESTABLISHED\t2080\tfirefox.exe\tN/A",
+      "suspicious_port": false
+    },
+    {
+      "proto": "TCPv4",
+      "local": "10.0.2.15",
+      "remote": "49239",
+      "state": "172.217.167.138",
+      "raw": "0x5fcceb30\tTCPv4\t10.0.2.15\t49239\t172.217.167.138\t443\tESTABLISHED\t2080\tfirefox.exe\tN/A",
+      "suspicious_port": false
+    },
+    {
+      "proto": "TCPv4",
+      "local": "10.0.2.15",
+      "remote": "49216",
+      "state": "172.217.167.142",
+      "raw": "0x5fcdb460\tTCPv4\t10.0.2.15\t49216\t172.217.167.142\t443\tESTABLISHED\t2080\tfirefox.exe\tN/A",
+      "suspicious_port": false
+    },
+    {
+      "proto": "TCPv4",
+      "local": "10.0.2.15",
+      "remote": "49218",
+      "state": "216.58.200.142",
+      "raw": "0x5fcebcf0\tTCPv4\t10.0.2.15\t49218\t216.58.200.142\t443\tESTABLISHED\t2080\tfirefox.exe\tN/A",
+      "suspicious_port": false
+    },
+    {
+      "proto": "TCPv4",
+      "local": "10.0.2.15",
+      "remote": "49217",
+      "state": "216.58.200.142",
+      "raw": "0x5fcf5cf0\tTCPv4\t10.0.2.15\t49217\t216.58.200.142\t443\tESTABLISHED\t2080\tfirefox.exe\tN/A",
+      "suspicious_port": false
+    },
+    {
+      "proto": "UDPv6",
+      "local": "fe80::6dfd:18d9:71ed:3522",
+      "remote": "1900",
+      "state": "*",
+      "raw": "0x5fcf6010\tUDPv6\tfe80::6dfd:18d9:71ed:3522\t1900\t*\t0\t\t1308\tsvchost.exe\t2019-08-19 14:42:39.000000 UTC",
+      "suspicious_port": false
+    },
+    {
+      "proto": "TCPv4",
+      "local": "10.0.2.15",
+      "remote": "49226",
+      "state": "172.217.163.170",
+      "raw": "0x5fcf8010\tTCPv4\t10.0.2.15\t49226\t172.217.163.170\t443\tESTABLISHED\t2080\tfirefox.exe\tN/A",
+      "suspicious_port": false
+    },
+    {
+      "proto": "TCPv4",
+      "local": "10.0.2.15",
+      "remote": "49209",
+      "state": "172.217.163.67",
+      "raw": "0x5fcfe010\tTCPv4\t10.0.2.15\t49209\t172.217.163.67\t443\tESTABLISHED\t2080\tfirefox.exe\tN/A",
+      "suspicious_port": false
+    },
+    {
+      "proto": "TCPv4",
+      "local": "10.0.2.15",
+      "remote": "49219",
+      "state": "172.217.163.110",
+      "raw": "0x5fd03010\tTCPv4\t10.0.2.15\t49219\t172.217.163.110\t443\tESTABLISHED\t2080\tfirefox.exe\tN/A",
+      "suspicious_port": false
+    },
+    {
+      "proto": "TCPv4",
+      "local": "10.0.2.15",
+      "remote": "49213",
+      "state": "172.217.160.131",
+      "raw": "0x5fd039d0\tTCPv4\t10.0.2.15\t49213\t172.217.160.131\t80\tFIN_WAIT2\t2080\tfirefox.exe\tN/A",
+      "suspicious_port": false
+    },
+    {
+      "proto": "TCPv4",
+      "local": "10.0.2.15",
+      "remote": "49227",
+      "state": "172.217.163.170",
+      "raw": "0x5fd03cf0\tTCPv4\t10.0.2.15\t49227\t172.217.163.170\t443\tESTABLISHED\t2080\tfirefox.exe\tN/A",
+      "suspicious_port": false
+    },
+    {
+      "proto": "TCPv4",
+      "local": "10.0.2.15",
+      "remote": "49222",
+      "state": "172.217.31.206",
+      "raw": "0x5fd058d0\tTCPv4\t10.0.2.15\t49222\t172.217.31.206\t443\tESTABLISHED\t2080\tfirefox.exe\tN/A",
+      "suspicious_port": false
+    },
+    {
+      "proto": "UDPv4",
+      "local": "0.0.0.0",
+      "remote": "0",
+      "state": "*",
+      "raw": "0x5fd0eec0\tUDPv4\t0.0.0.0\t0\t*\t0\t\t668\tVBoxService.ex\t2019-08-19 14:42:51.000000 UTC",
+      "suspicious_port": false
+    },
+    {
+      "proto": "UDPv4",
+      "local": "0.0.0.0",
+      "remote": "0",
+      "state": "*",
+      "raw": "0x5fd6a010\tUDPv4\t0.0.0.0\t0\t*\t0\t\t668\tVBoxService.ex\t2019-08-19 14:42:43.000000 UTC",
+      "suspicious_port": false
+    },
+    {
+      "proto": "UDPv4",
+      "local": "127.0.0.1",
+      "remote": "1900",
+      "state": "*",
+      "raw": "0x5fe17550\tUDPv4\t127.0.0.1\t1900\t*\t0\t\t1308\tsvchost.exe\t2019-08-19 14:42:39.000000 UTC",
+      "suspicious_port": false
+    },
+    {
+      "proto": "UDPv4",
+      "local": "10.0.2.15",
+      "remote": "1900",
+      "state": "*",
+      "raw": "0x5fe18270\tUDPv4\t10.0.2.15\t1900\t*\t0\t\t1308\tsvchost.exe\t2019-08-19 14:42:39.000000 UTC",
+      "suspicious_port": false
+    },
+    {
+      "proto": "UDPv6",
+      "local": "::1",
+      "remote": "58499",
+      "state": "*",
+      "raw": "0x5fe4f490\tUDPv6\t::1\t58499\t*\t0\t\t1308\tsvchost.exe\t2019-08-19 14:42:39.000000 UTC",
+      "suspicious_port": false
+    },
+    {
+      "proto": "TCPv4",
+      "local": "10.0.2.15",
+      "remote": "49177",
+      "state": "13.224.25.60",
+      "raw": "0x5fe4fcf0\tTCPv4\t10.0.2.15\t49177\t13.224.25.60\t443\tESTABLISHED\t2080\tfirefox.exe\tN/A",
+      "suspicious_port": false
+    },
+    {
+      "proto": "TCPv4",
+      "local": "10.0.2.15",
+      "remote": "49174",
+      "state": "35.167.81.14",
+      "raw": "0x5fe61010\tTCPv4\t10.0.2.15\t49174\t35.167.81.14\t443\tCLOSED\t2080\tfirefox.exe\t-",
+      "suspicious_port": false
+    },
+    {
+      "proto": "TCPv4",
+      "local": "10.0.2.15",
+      "remote": "49181",
+      "state": "117.18.237.29",
+      "raw": "0x5fe67cf0\tTCPv4\t10.0.2.15\t49181\t117.18.237.29\t80\tESTABLISHED\t2080\tfirefox.exe\tN/A",
+      "suspicious_port": false
+    },
+    {
+      "proto": "UDPv6",
+      "local": "::1",
+      "remote": "1900",
+      "state": "*",
+      "raw": "0x5ff6b6d0\tUDPv6\t::1\t1900\t*\t0\t\t1308\tsvchost.exe\t2019-08-19 14:42:39.000000 UTC",
+      "suspicious_port": false
+    }
+  ],
+  "malfind": [],
+  "commands": []
+}
