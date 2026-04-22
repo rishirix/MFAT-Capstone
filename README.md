@@ -98,12 +98,3 @@ Download from: https://github.com/volatilityfoundation/volatility/wiki/Memory-Sa
 or CTF challenges from: https://github.com/stuxnet999/MemLabs
 
 ---
-
-## Linux Notes (for teammates on Linux)
-
-Everything works the same. The Docker socket path `/var/run/docker.sock` is the same.
-No Docker Desktop needed — just Docker Engine:
-```bash
-sudo apt install docker.io
-sudo usermod -aG docker $USER
-```
