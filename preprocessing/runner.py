@@ -10,6 +10,7 @@ import os
 from pathlib import Path
 
 DUMP_DIR = Path("./dump").resolve()
+VOL2_IMAGE = "vol2"
 VOL3_IMAGE = "vol3"
 
 VOL3_PLUGINS = [

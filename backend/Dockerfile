@@ -13,6 +13,9 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy full project into container
 COPY . .
 
+RUN docker build -t vol2 ./volatility2/
+RUN docker build -t vol3 ./volatility3/
+
 # Create folders
 RUN mkdir -p /app/dump /app/results
 

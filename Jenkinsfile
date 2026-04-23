@@ -27,6 +27,17 @@ pipeline {
             }
         }
 
+        stage('Build Volatility Images') {
+            parallel {
+                
+                stage('Build vol2') {
+                    steps {
+                        sh 'docker build -t vol2 ./volatility2'
+                    }
+                }
+            }
+        }
+
         stage('Build Backend') {
             steps {
                 echo '--- Building MFAT backend image ---'
