@@ -16,7 +16,7 @@ pipeline {
             }
         }
 
-        stage('Build Volatility Images') {
+        stage('Build Volatility3') {
             parallel {
                 
                 stage('Build vol3') {
@@ -27,7 +27,7 @@ pipeline {
             }
         }
 
-        stage('Build Volatility Images') {
+        stage('Build Volatility2') {
             parallel {
                 
                 stage('Build vol2') {
