@@ -24,3 +24,6 @@ services:
 volumes:
   mfat_dumps:
   mfat_results:
+
+
+  
