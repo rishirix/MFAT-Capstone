@@ -19,3 +19,5 @@ RUN mkdir -p /app/dump /app/results
 EXPOSE 5000
 
 CMD ["python", "backend/app.py"]
+
+
