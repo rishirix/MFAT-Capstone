@@ -33,4 +33,15 @@ pipeline {
             }
         }
     }
+    post {
+        success {
+            echo '=== MFAT Pipeline PASSED. Dashboard at http://localhost:5000 ==='
+        }
+        failure {
+            echo '=== MFAT Pipeline FAILED. Check the logs above. ==='
+        }
+        always {
+            echo '--- Pipeline finished ---'
+        }
+    }
 }
