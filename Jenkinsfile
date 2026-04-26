@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/rishirix/MFAT-Capstone.git --branch testing'
+                Checkout scm
             }
         }
 
