@@ -8,13 +8,30 @@ pipeline {
             }
         }
 
-        stage('Rebuild Docker Images') {
-            steps{
-                sh 'docker compose down backend || true'
-                sh 'docker compose up -d --build backend'
+        stage('Build Docker Image') {
+            steps {
+                sh 'docker build -t backend:latest .'
             }
         }
 
+        stage('Stop Old Container') {
+            steps {
+                sh 'docker container stop backend || true'
+            }
+        }
+
+        stage('Run New Container') {
+            steps {
+                sh '''
+                docker run -d \
+                  --name backend \
+                  -p 5000:5000 \
+                  -v dumps:/app/dump \
+                  -v results:/app/results \
+                  backend:latest
+                '''
+            }
+        }
     }
     post {
         success {
