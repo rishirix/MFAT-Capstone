@@ -1,7 +1,5 @@
 from python:3.12-slim
 
-#run apt update && apt install python3-dev python3-pip -y
-
 workdir /app
 
 copy . .
