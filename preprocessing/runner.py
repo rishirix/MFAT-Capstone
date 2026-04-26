@@ -10,8 +10,7 @@ import os
 from pathlib import Path
 
 DUMP_DIR = Path("./dump").resolve()
-VOL2_IMAGE = "vol2"
-VOL3_IMAGE = "vol3"
+#VOL3_IMAGE = "vol3"
 
 VOL3_PLUGINS = [
     "windows.pslist",
@@ -26,15 +25,10 @@ VOL3_PLUGINS = [
 
 def run_docker_vol3(image_name, plugin, extra_args=[]):
     """Run a Volatility 3 plugin via Docker and return stdout."""
-    cmd = [
-        "docker", "run", "--rm",
-        "-v", f"{DUMP_DIR}:/dump",
-        VOL3_IMAGE,
-        "-f", f"/dump/{image_name}",
-        plugin
+    cmd = ["vol","-f",f"{DUMP_DIR}/{image_name}",plugin
     ] + extra_args
 
-    result = subprocess.run(cmd, capture_output=True, text=True, timeout=180, encoding='utf-8', errors='replace')
+    result = subprocess.run(cmd, capture_output=True, text=True, timeout=300, encoding='utf-8', errors='replace')
     return result.stdout, result.stderr, result.returncode
 
 

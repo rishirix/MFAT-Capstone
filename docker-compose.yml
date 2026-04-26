@@ -1,35 +1,32 @@
 version: "3.9"
 
 services:
-
-  vol2:
-    build:
-      context: ./volatility2
-    image: vol2
-    profiles: ["build"]
-
-  vol3:
-    build:
-      context: ./volatility3
-    image: vol3
-    profiles: ["build"]
-
   backend:
     build:
       context: .
-      dockerfile: backend/Dockerfile
-    image: mfat-backend
+      dockerfile: Dockerfile
+    image: backend:latest
+    container_name: backend
     ports:
       - "5000:5000"
     volumes:
+      - dumps:/app/dump
+      - results:/app/results
+    restart: unless-stopped
+
+  jenkins:
+    image: jenkins/jenkins:lts
+    container_name: jenkins
+    user: root
+    ports:
+      - "8080:8080"
+      - "50000:50000"
+    volumes:
+      - jenkins_home:/var/jenkins_home
       - /var/run/docker.sock:/var/run/docker.sock
-      - mfat_dumps:/app/dump
-      - mfat_results:/app/results
     restart: unless-stopped
 
 volumes:
-  mfat_dumps:
-  mfat_results:
-
-
-  
+  jenkins_home:
+  dumps:
+  results:
