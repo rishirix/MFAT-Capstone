@@ -16,7 +16,7 @@ pipeline {
 
         stage('Stop Old Container') {
             steps {
-                sh 'docker container stop backend || true'
+                sh '''docker container stop backend || true && docker container rm backend'''
             }
         }
 
